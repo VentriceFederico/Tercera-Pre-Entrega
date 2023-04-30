@@ -1,0 +1,1 @@
+alert("Este es index");
