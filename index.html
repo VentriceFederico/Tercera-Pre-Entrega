@@ -5,54 +5,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/styles_index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;600&display=swap" rel="stylesheet">
-    <title>Segunda Pre Entrega</title>
+    <title>Tercera Pre Entrega</title>
 </head>
 
 <body>
     <header>
-        <h1>Itinerario Vuelos</h1>
+        <h1>Itinerario Viajes</h1>
     </header>
     <form id="form" class="form">
-        <h2 class="form-title">Ingrese su Vuelo</h2>
-        <input id="titular" type="text" class="form-input" placeholder="Titular" required>
+        <h2 class="form-title">Ingrese su Viaje</h2>
+        <label >Titular</label>
+        <input id="nombre" type="text" class="form-input" placeholder="Titular" required>
+        <label>Origen</label>
+        <input id="origen" list="Origen" class="form-input" placeholder="Origen" required>
+        <datalist id="Origen">
+            <option value="BUENOS AIRES"></option>
+            <option value="ROSARIO"></option>
+        </datalist>
+        <label>Destino</label>
+        <input id="destino" list="Destino" class="form-input" placeholder="Destino" required>
+        <datalist id="Destino">
+            <option value="MISIONES"></option>
+            <option value="MENDOZA"></option>
+            <option value="SANTA CRUZ"></option>
+            <option value="SALTA"></option>
+            <option value="NEUQUEN"></option>
+        </datalist>
+        <label for="fechaIda">Ida</label>
         <input id="fechaIda" type="date" class="form-input" placeholder="Fecha Ida" required>
+        <label for="fechaVuelta">Vuelta</label>
         <input id="fechaVuelta" type="date" class="form-input" placeholder="Fecha Vuelta" required>
-        <input id="origen" type="text" class="form-input" placeholder="Origen" required>
-        <input id="destino" type="text" class="form-input" placeholder="Destino" required>
+        <label>Cantidad de pasajeros</label>
         <input id="pasajeros" type="number" class="form-input" placeholder="Pasajeros" required>
         <button class="form-btn" type="submit">Ingresar</button>
+        
+        
     </form>
-    <h2 class="title">Vuelos</h2>
+    <h2 class="title">Viajes</h2>
     <nav>
             <ul>
                 <li>
-                    <a href="index.html">Ver Vuelos</a>
+                    <a href="index.html">Ver Viajes</a>
                 </li>
                 <li>
-                    <a href="editar.html">Editar Vuelos</a>
+                    <a href="editar.html">Editar Viajes</a>
                 </li>
             </ul>
         </nav>
-    <section id="vuelos" class="vuelos">
-        
-        <div class="vuelos-tarjeta">
-            <img src="./img/tarjeta_img.jpg" alt="img_tarjeta">
-            <span class="form-title-barra"></span>
-            <h3>Titular:</h3>
-            <p>Origen:</p>
-            <p>Destino:</p>
-            <p>Fecha Ida:</p>
-            <p>Fecha Vuelta:</p>
-            <p>Cantidad de pasajeros:</p>
-            <span>$10000</span>
-        </div>
+    <section id="viajes" class="vuelos">
         
     </section>
     <script src="./js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
 </body>
 
 </html>

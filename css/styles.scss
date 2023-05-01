@@ -75,6 +75,14 @@ body {
         color: #757572;
         font-family: "Abel", sans-serif;
         letter-spacing: 1px;
+        border-radius: 5px;
+    }
+    label{
+        font-size: 1.9rem;
+        color: #fff;
+        text-align: center;
+        background-color: rgba($color: #757572, $alpha: 0.8);
+        border-radius: 5px;
     }
 }
 
@@ -124,7 +132,7 @@ nav{
     
     &-tarjeta {
         width: 25rem;
-        height: 47rem;
+        height: 62rem;
         border: 2px solid #2e3569;
         border-radius: 5px;
         display: flex;
