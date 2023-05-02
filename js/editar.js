@@ -168,7 +168,7 @@ function editarViaje(id){
         viajes[index].fechaIda = fecha1;
         viajes[index].fechaVuelta = fecha2;
         viajes.forEach(viaje => {
-            viaje.viajeEstadia(fecha1, fecha2);
+            viaje.viajeEstadia(viaje.fechaIda, viaje.fechaVuelta);
             viaje.viajePrecio();
         })
 
@@ -181,5 +181,82 @@ function editarViaje(id){
     })
 }
 
-console.log(viajes);
+function filtrado(viajes) {
+    let nombreIngresado, origenIngresado, destinoIngresado;
+
+    const filterNombre = document.querySelector("#filtroNombre");
+    filterNombre.addEventListener("keyup", (e) => {
+        nombreIngresado = e.target.value.toUpperCase();
+        const arr_filtrado = viajes.filter(el => el.nombre.includes(nombreIngresado));
+
+        const tarjetaViaje = document.querySelectorAll(".vuelos-tarjeta").forEach((element) => element.classList.add("filter"));
+        let tarjetaViajeFilter;
+        for (const filtrado of arr_filtrado) {
+            tarjetaViajeFilter = document.querySelector("#viaje_tarjeta_" + filtrado.id);
+            tarjetaViajeFilter.classList.remove("filter");
+        }
+    })
+
+    const filterOrigen = document.querySelector("#filtroOrigen");
+    filterOrigen.addEventListener("keyup", (e) => {
+        origenIngresado = e.target.value.toUpperCase();
+        const arr_filtrado = viajes.filter(el => el.origen.includes(origenIngresado));
+
+        const tarjetaViaje = document.querySelectorAll(".vuelos-tarjeta").forEach((element) => element.classList.add("filter"));
+        let tarjetaViajeFilter;
+        for (const filtrado of arr_filtrado) {
+            tarjetaViajeFilter = document.querySelector("#viaje_tarjeta_" + filtrado.id);
+            tarjetaViajeFilter.classList.remove("filter");
+        }
+    })
+
+    const filterDestino = document.querySelector("#filtroDestino");
+    filterDestino.addEventListener("keyup", (e) => {
+        destinoIngresado = e.target.value.toUpperCase();
+        const arr_filtrado = viajes.filter(el => el.destino.includes(destinoIngresado));
+
+        const tarjetaViaje = document.querySelectorAll(".vuelos-tarjeta").forEach((element) => element.classList.add("filter"));
+        let tarjetaViajeFilter;
+        for (const filtrado of arr_filtrado) {
+            tarjetaViajeFilter = document.querySelector("#viaje_tarjeta_" + filtrado.id);
+            tarjetaViajeFilter.classList.remove("filter");
+        }
+    })
+
+    const filterMenorPrecio = document.querySelector("#filtroPrecio_menor");
+    filterMenorPrecio.addEventListener("click", () => {
+        viajes.sort((o1, o2) => {
+            if (o1.precio > o2.precio) {
+                return 1;
+            }
+            else if (o1.precio < o2.precio) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        })
+        location.reload();
+        localStorage.setItem("viajes", JSON.stringify(viajes));
+    })
+
+    const filterMayorPrecio = document.querySelector("#filtroPrecio_mayor");
+    filterMayorPrecio.addEventListener("click", () => {
+        viajes.sort((o1, o2) => {
+            if (o1.precio < o2.precio) {
+                return 1;
+            }
+            else if (o1.precio > o2.precio) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        })
+        location.reload();
+        localStorage.setItem("viajes", JSON.stringify(viajes));
+    })
+}
+
 imprimirViaje();
+filtrado(viajes);

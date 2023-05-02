@@ -45,7 +45,6 @@
         
         
     </form>
-    <h2 class="title">Viajes</h2>
     <nav>
             <ul>
                 <li>
@@ -55,6 +54,21 @@
                     <a href="editar.html">Editar Viajes</a>
                 </li>
             </ul>
+    </nav>
+
+    <nav class="filtradoNav" id="filtro">
+            <h2>Filtros</h2>
+            <br>
+            <label for="filtroNombre">Titular</label>
+            <input id="filtroNombre" type="text" class="filtradoNav-input" placeholder="Ingrese Titular">
+            <label for="filtroOrigen">Origen</label>
+            <input id="filtroOrigen" type="text" class="filtradoNav-input" placeholder="Ingrese Origen" list="Origen">
+            <label for="filtroDestino">Destino</label>
+            <input id="filtroDestino" type="text" class="filtradoNav-input" placeholder="Ingrese Destino" list="Destino">
+            <label for="filtroPrecio_menor">Menor Precio</label>
+            <input id="filtroPrecio_menor" type="submit" class="filtradoNav-input" name="precio">
+            <label for="filtroPrecio_mayor">Mayor Precio</label>
+            <input id="filtroPrecio_mayor" type="submit" class="filtradoNav-input" name="precio">
         </nav>
     <section id="viajes" class="vuelos">
         

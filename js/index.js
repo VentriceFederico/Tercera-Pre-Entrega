@@ -114,7 +114,7 @@ function crearViaje() {
     })
 }
 
-function imprimirViaje() {
+function imprimirViaje(viajes) {
 
     viajes.forEach(viaje => {
         verViaje(viaje);
@@ -124,6 +124,9 @@ function imprimirViaje() {
 function verViaje(viaje) {
     let fecha1 = new Date(viaje.fechaIda);
     let fecha2 = new Date(viaje.fechaVuelta);
+
+    fecha1 = fechaOffset(fecha1);
+    fecha2 = fechaOffset(fecha2);
 
     const contenedorViajes = document.querySelector("#viajes");
     const tarjetaViaje = document.createElement("div");
@@ -159,7 +162,6 @@ function checkOrigen(origen) {
 }
 
 function checkDestino(destino) {
-    console.log(destino);
     switch (destino) {
         case DESTINO_1:
             return false;
@@ -181,7 +183,89 @@ function checkDestino(destino) {
     }
 }
 
-crearViaje();
-imprimirViaje();
+function fechaOffset(fecha) {
+    fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
+    return fecha;
+}
 
-console.log(viajes);
+function filtrado(viajes) {
+    let nombreIngresado, origenIngresado, destinoIngresado;
+
+    const filterNombre = document.querySelector("#filtroNombre");
+    filterNombre.addEventListener("keyup", (e) => {
+        nombreIngresado = e.target.value.toUpperCase();
+        const arr_filtrado = viajes.filter(el => el.nombre.includes(nombreIngresado));
+
+        const tarjetaViaje = document.querySelectorAll(".vuelos-tarjeta").forEach((element) => element.classList.add("filter"));
+        let tarjetaViajeFilter;
+        for (const filtrado of arr_filtrado) {
+            tarjetaViajeFilter = document.querySelector("#viaje_tarjeta_" + filtrado.id);
+            tarjetaViajeFilter.classList.remove("filter");
+        }
+    })
+
+    const filterOrigen = document.querySelector("#filtroOrigen");
+    filterOrigen.addEventListener("keyup", (e) => {
+        origenIngresado = e.target.value.toUpperCase();
+        const arr_filtrado = viajes.filter(el => el.origen.includes(origenIngresado));
+
+        const tarjetaViaje = document.querySelectorAll(".vuelos-tarjeta").forEach((element) => element.classList.add("filter"));
+        let tarjetaViajeFilter;
+        for (const filtrado of arr_filtrado) {
+            tarjetaViajeFilter = document.querySelector("#viaje_tarjeta_" + filtrado.id);
+            tarjetaViajeFilter.classList.remove("filter");
+        }
+    })
+
+    const filterDestino = document.querySelector("#filtroDestino");
+    filterDestino.addEventListener("keyup", (e) => {
+        destinoIngresado = e.target.value.toUpperCase();
+        const arr_filtrado = viajes.filter(el => el.destino.includes(destinoIngresado));
+
+        const tarjetaViaje = document.querySelectorAll(".vuelos-tarjeta").forEach((element) => element.classList.add("filter"));
+        let tarjetaViajeFilter;
+        for (const filtrado of arr_filtrado) {
+            tarjetaViajeFilter = document.querySelector("#viaje_tarjeta_" + filtrado.id);
+            tarjetaViajeFilter.classList.remove("filter");
+        }
+    })
+
+    const filterMenorPrecio = document.querySelector("#filtroPrecio_menor");
+    filterMenorPrecio.addEventListener("click", () => {
+        viajes.sort((o1, o2) => {
+            if (o1.precio > o2.precio) {
+                return 1;
+            }
+            else if (o1.precio < o2.precio) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        })
+        location.reload();
+        localStorage.setItem("viajes", JSON.stringify(viajes));
+    })
+
+    const filterMayorPrecio = document.querySelector("#filtroPrecio_mayor");
+    filterMayorPrecio.addEventListener("click", () => {
+        viajes.sort((o1, o2) => {
+            if (o1.precio < o2.precio) {
+                return 1;
+            }
+            else if (o1.precio > o2.precio) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        })
+        location.reload();
+        localStorage.setItem("viajes", JSON.stringify(viajes));
+    })
+}
+
+crearViaje();
+filtrado(viajes);
+imprimirViaje(viajes);
+
